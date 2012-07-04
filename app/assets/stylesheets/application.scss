@@ -1,0 +1,31 @@
+.user-widget {
+  $avatar-height: 50px;
+  $padding: 5px;
+  border: 2px solid #ccc;
+  background-color: #eee;
+  padding: $padding;
+  height: $avatar-height;
+  border-radius: 2px;
+  width: 200px;
+
+  .name {
+    font-family: Helvetica;
+    font-size: 20px;
+  }
+
+  img.avatar {
+    height: $avatar-height;
+    width: $avatar-height;
+    float: left;
+    margin-right: 5px;
+  }
+
+  &.is-loading {
+    text-align: center;
+    background-color: #fff;
+  }
+
+  img.loader {
+    margin-top: 17px;
+  }
+}
