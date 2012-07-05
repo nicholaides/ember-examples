@@ -7,5 +7,5 @@
 	<img class="avatar" {{bindAttr src="user.avatarPath"}}/>
 	<span class="name">{{user.fullName}}<span>
 
-	{{view App.PokeView user=user}}
+	{{view App.PokeView userBinding="user"}}
 {{/if}}
