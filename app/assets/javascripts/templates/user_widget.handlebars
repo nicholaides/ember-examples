@@ -1,6 +1,10 @@
-{{#if content.isLoading}}
+{{#if user.isLoading}}
+
 	<img class="loader" src="/assets/ajax-loader.gif"/>
+
 {{else}}
-	<img class="avatar" {{bindAttr src="content.avatarPath"}}/>
-	<span class="name">{{content.fullName}}<span>
+
+	<img class="avatar" {{bindAttr src="user.avatarPath"}}/>
+	<span class="name">{{user.fullName}}<span>
+
 {{/if}}

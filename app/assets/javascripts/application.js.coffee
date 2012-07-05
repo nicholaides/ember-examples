@@ -2,11 +2,12 @@
 #= require jquery_ujs
 #= require handlebars
 #
-#= require ember_settings
-#= require ember
-#= require ember-data
-#
 #= require_self
-#= require ember_talk
+#= require ember
+#= require_tree ./templates
+#
+#= require user_follow_example
 
-window.App = Ember.Application.create()
+window.ENV =
+  CP_DEFAULT_CACHEABLE   : true
+  VIEW_PRESERVES_CONTEXT : true

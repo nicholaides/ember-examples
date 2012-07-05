@@ -1,8 +1,1 @@
 %h1 Example App
-
-:handlebars
-  {{view App.UserWidget contentBinding="App.showingUser"}}
-:coffeescript
-  window.user = App.User.create()
-  App.set 'showingUser', user
-  user.loadFrom '/users/dave.json'
