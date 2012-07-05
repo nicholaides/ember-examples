@@ -1,14 +1,14 @@
 window.App = Ember.Application.create()
 
 App.UserWidgetView = Ember.View.extend
-  templateName: 'user_widget'
-  classNames: ['user-widget']
+  templateName:      'user_widget'
+  classNames:        ['user-widget']
   classNameBindings: ['user.isLoading']
 
 App.PokeView = Ember.View.extend
-  tagName: 'input'
+  tagName:           'input'
   attributeBindings: ['type', 'value', 'disabled']
-  type: 'button'
+  type:              'button'
 
   disabled: (->
     @getPath 'user.isPoked'
