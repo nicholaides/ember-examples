@@ -38,8 +38,27 @@ App.User = Ember.Object.extend
     $.post @get('pokesPath')
 
 App.User.reopenClass
-  loadMore: (callback)->
-    $.getJSON '/users/more', (response)=>
-      users = response.users.map (userAttributes)=>
-        @create userAttributes
-      callback(users)
+  createMany: (usersListAttributes)->
+    usersListAttributes.map (userAttributes)=>
+      @create userAttributes
+
+App.UsersController = Ember.ArrayController.extend
+  content: []
+
+  load: ->
+    @loadFrom '/users'
+
+  loadMore: ->
+    @loadFrom '/users/more'
+
+  loadFrom: (url)->
+    $.getJSON url, (response)=>
+      users = App.User.createMany(response.users)
+      @pushObjects users
+
+App.UserListView = Ember.View.extend
+  templateName: 'user_list'
+  showMore: (event)->
+    event.preventDefault()
+    @get('content').loadMore()
+
