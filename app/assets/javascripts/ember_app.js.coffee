@@ -3,7 +3,7 @@ window.App = Ember.Application.create()
 App.UserWidgetView = Ember.View.extend
   templateName:      'user_widget'
   classNames:        ['user-widget']
-  classNameBindings: ['user.isLoading']
+  classNameBindings: ['content.isLoading']
 
 App.PokeView = Ember.View.extend
   tagName:           'input'
@@ -11,15 +11,15 @@ App.PokeView = Ember.View.extend
   type:              'button'
 
   disabled: (->
-    @getPath 'user.isPoked'
-  ).property 'user.isPoked'
+    @getPath 'content.isPoked'
+  ).property 'content.isPoked'
 
   value: (->
-    if @getPath 'user.isPoked' then 'Poked' else 'Poke'
-  ).property 'user.isPoked'
+    if @getPath 'content.isPoked' then 'Poked' else 'Poke'
+  ).property 'content.isPoked'
 
   click: ->
-    @get('user').poke()
+    @get('content').poke()
 
 
 App.User = Ember.Object.extend
@@ -37,11 +37,9 @@ App.User = Ember.Object.extend
     @set 'isPoked', true
     $.post @get('pokesPath')
 
-$ ->
-  userWidget = App.UserWidgetView.create()
-  userWidget.appendTo $('body')
-
-  user = App.User.create()
-  userWidget.set 'user', user
-
-  user.loadFrom '/users/dave.json'
+App.User.reopenClass
+  loadMore: (callback)->
+    $.getJSON '/users/more', (response)=>
+      users = response.users.map (userAttributes)=>
+        @create userAttributes
+      callback(users)

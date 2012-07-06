@@ -1,11 +1,10 @@
-{{#if user.isLoading}}
+{{#if view.content.isLoading}}
 
 	<img class="loader" src="/assets/ajax-loader.gif"/>
 
 {{else}}
 
-	<img class="avatar" {{bindAttr src="user.avatarPath"}}/>
-	<span class="name">{{user.fullName}}<span>
-
-	{{view App.PokeView userBinding="user"}}
+	<img class="avatar" {{bindAttr src="view.content.avatarPath"}}/>
+	<div class="name">{{view.content.fullName}}</div>
+	{{view App.PokeView contentBinding="view.content"}}
 {{/if}}

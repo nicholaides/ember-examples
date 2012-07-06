@@ -5,8 +5,7 @@
 #= require_self
 #= require ember
 #= require_tree ./templates
-#
-#= require user_follow_example
+#= require ./ember_app
 
 window.ENV =
   CP_DEFAULT_CACHEABLE   : true
