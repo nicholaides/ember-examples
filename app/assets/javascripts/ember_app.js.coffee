@@ -23,12 +23,6 @@ App.PokeView = Ember.View.extend
 
 
 App.User = Ember.Object.extend
-  loadFrom: (url)->
-    @set 'isLoading', true
-    $.getJSON url, (userAttributes)=>
-      @setProperties userAttributes
-      @set 'isLoading', false
-
   fullName: (->
     @get('firstName') + " " + @get('lastName')
   ).property 'firstName', 'lastName'
@@ -42,19 +36,30 @@ App.User.reopenClass
     usersListAttributes.map (userAttributes)=>
       @create userAttributes
 
+  loadMany: (url, callback)->
+    $.getJSON url, (response)=>
+      users = @createMany response.users
+      callback users
+
+  loadOne: (url)->
+    user = @create(isLoading: true)
+    $.getJSON url, (userAttributes)=>
+      user.setProperties userAttributes
+      user.set 'isLoading', false
+    user
+
+
 App.UsersController = Ember.ArrayController.extend
   content: []
 
   load: ->
-    @loadFrom '/users'
+    App.User.loadMany '/users', (users)=>
+      @pushObjects users
 
   loadMore: ->
-    @loadFrom '/users/more'
-
-  loadFrom: (url)->
-    $.getJSON url, (response)=>
-      users = App.User.createMany(response.users)
+    App.User.loadMany '/users/more', (users)=>
       @pushObjects users
+
 
 App.UserListView = Ember.View.extend
   templateName: 'user_list'
