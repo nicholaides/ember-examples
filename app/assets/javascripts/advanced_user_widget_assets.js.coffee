@@ -1,4 +1,3 @@
-window.App = Ember.Application.create()
 
 App.UserWidgetView = Ember.View.extend
   templateName:      'user_widget'

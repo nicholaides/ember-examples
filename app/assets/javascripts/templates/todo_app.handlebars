@@ -1,0 +1,6 @@
+<h1>TODOs</h1>
+
+{{collection contentBinding="view.tasks" itemViewClass="App.TaskView"}}
+
+{{view Ember.TextField valueBinding="view.newTaskTitle"}}
+<button {{action addTask}}>Add</button>
